@@ -39,10 +39,6 @@ body,
   margin-top: 10px;
 }
 
-.spacer {
-  height: 100%;
-}
-
 .bubble-wrap {
   margin: 0 auto;
   display: flex;
@@ -75,7 +71,8 @@ body,
 }
 
 .delete {
-  color: rgb(216, 87, 87);
+  color: pink;
+  cursor: pointer;
 }
 
 .color-box {

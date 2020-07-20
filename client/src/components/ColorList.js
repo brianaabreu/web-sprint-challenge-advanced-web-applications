@@ -9,22 +9,11 @@ const initialColor = {
 const ColorList = ({ colors, updateColors, refresh, setRefresh}) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  const [colorToAdd, setColorToAdd] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
   };
-
-  const addColor = e => {
-    e.prevetnDefault();
-    axiosWithAuth()
-      .post(`http://localhost:5000/api/colors`, colorToAdd)
-      .then(res => {
-        setRefresh(!refresh);
-      })
-      .catch(err => console.log(err));
-  }
 
   const saveEdit = e => {
     e.preventDefault();
@@ -42,7 +31,7 @@ const ColorList = ({ colors, updateColors, refresh, setRefresh}) => {
   const deleteColor = e => {
     // make a delete request to delete this color
    axiosWithAuth()
-    .delete(`http://localhost:5000/api/colors/${colors.id}`)
+    .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
     .then(res => {
       setRefresh(!refresh);
     })
@@ -64,7 +53,7 @@ const ColorList = ({ colors, updateColors, refresh, setRefresh}) => {
                   deleteColor(color);
                 }}>
                 x
-              </span>{' '}
+              </span>
               {color.color}
             </span>
             <div
